@@ -6,7 +6,7 @@ const Schema = mongoose.Schema
 const ConvoSchema = new Schema({
     content:{
         type: String,
-        required: "you must include a title for each note"
+        required: "you must include text"
     },
     bulletId: {
         type: Number

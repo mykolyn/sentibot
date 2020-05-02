@@ -2,11 +2,12 @@ const db = require("../models");
 
 module.exports = function(app) {
     app.get("/api/convo", function(req,res){
-        db.Convo.find({})
-        .then(function(data){
+        db.Convo.find()
+            .sort({date:-1})
+        .then((data) => {
             res.json(data)
         })
-        .catch(function(err){
+        .catch((err)=>{
             res.json(err)
         })
     });
