@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-class CreateAcnt extends Component {
+class SignUp extends Component {
     render () {
         return (
             <h4>Create An Account</h4>
@@ -8,4 +8,4 @@ class CreateAcnt extends Component {
     }
 };
 
-export default CreateAcnt;
+export default SignUp;
