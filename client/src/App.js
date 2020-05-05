@@ -1,55 +1,28 @@
-import React, { Component } from 'react';
-import axios from'axios';
+import React from 'react';
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import './App.css';
 
-class App extends Component {
-state= {
-  MessagesList:[],
-  // {title:'cats'},{title:'dog'}
-  newMessage:""
-}
+// Importing pages
+import Login from "./pages/login.js";
+import History from "./pages/history.js";
+import Home from "./pages/home.js";
+import SignUp from "./pages/signup.js";
 
-
-
-componentDidMount(){
-axios.get('/api/convo')
-.then((result) => {
-  console.log(result.data)
-  this.setState({MessagesList: result.data})
-})
-.catch(err=> console.log(err))
-}
-
-handleChange = (event)=>{
-this.setState({ newMessage: event.target.value})
-};
-
-handleClick = (event) => {
-  event.preventDefault();
-  axios.post('/api/convo', {content: this.state.newMessage})
-  .then((result) =>{
-    console.log("result from app.js", result.data)
-   
-      window.location.reload();
-    
-  })
-  .catch(err=> console.log(err))
-}
-  render(){
-    return(
-      <div className='App'>
-        <form> 
-          <input val={this.state.newMessage} onChange={this.handleChange}/>
-          <button onClick={this.handleClick}>submit</button>
-        </form>
-        <div>
-          {this.state.MessagesList.map(event =>
-            <p key={event._id}>{event.content}</p>
-            )}
-        </div>
+function App() {
+  return (
+    <Router>
+      <div className="App">
+      
+      <Switch>
+        <Route exact path="/" component={Login} />
+        <Route exact path="/history" component={History} />
+        <Route exact path="/home" component={Home} />
+        <Route exact path="/signup" component={SignUp} />
+      </Switch>
       </div>
-    )
-  }
-
-};
+    </Router>
+  );
+}
 
 export default App;
+
