@@ -25,7 +25,7 @@ if(process.env.NODE_ENV ==="production"){
 
 
 //DB config
-const mongodb = require('./config/keys').mongoURI
+const mongodb = require('./config/keys').mLab.MONGODB_URI;
 
 // Connect the Mongo
 mongoose.connect(process.env.MONGODB_URI ||  mongodb, {useNewUrlParser: true})

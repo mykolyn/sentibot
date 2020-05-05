@@ -1,22 +1,28 @@
-import React, { Component } from 'react';
-import AppNavBar from './Components/AppNavbar';
-import 'bootstrap/dist/css/bootstrap.min.css'
-import './App.css'
+import React from 'react';
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import './App.css';
 
 // Importing pages
 import Login from "./pages/login.js";
 import History from "./pages/history.js";
 import Home from "./pages/home.js";
 import SignUp from "./pages/signup.js";
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <AppNavBar />
 
+function App() {
+  return (
+    <Router>
+      <div className="App">
+      
+      <Switch>
+        <Route exact path="/" component={Login} />
+        <Route exact path="/history" component={History} />
+        <Route exact path="/home" component={Home} />
+        <Route exact path="/signup" component={SignUp} />
+      </Switch>
       </div>
-    )
-  }
+    </Router>
+  );
 }
 
 export default App;
+
