@@ -6,3 +6,10 @@ exports.watson = {
     key: process.env.watsonKey,
     url: process.env.watsonURL
 };
+
+exports.googleKey = {
+
+    clientID: process.env.clientID,
+    clientSecret: process.env.clientSecret,
+    cookiekey: process.env.cookieKey
+}
