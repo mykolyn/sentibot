@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import './App.css';
 
+
 // Importing pages
 import Login from "./pages/login.js";
 import History from "./pages/history.js";
