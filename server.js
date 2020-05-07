@@ -30,7 +30,7 @@ const mongodb = require('./config/keys').mLab.MONGODB_URI;
 // Connect the Mongo
 mongoose.connect(process.env.MONGODB_URI ||  mongodb, {useNewUrlParser: true})
 .then(()=>console.log("mongodb connected..."))
-.catch(()=> console.log(err));
+.catch((err)=> console.log(err));
 
 //use Routes
 app.use('/api/messages', messages)
