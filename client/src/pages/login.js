@@ -166,7 +166,7 @@ class Login extends Component {
       case "logIn":
         return (
 
-          <form onSubmit={this.handleFormSubmit}>
+          <form onSubmit={this.locallogin}>
             <h2>Welcome Back!</h2>
             <fieldset>
               <legend>Log In</legend>
