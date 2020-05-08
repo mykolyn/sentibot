@@ -8,7 +8,7 @@ class Google extends Component {
 
     googleLogin = (event) => {
         // console.log(event.target.value)
-        { console.log("in google button press") }
+        console.log("in google button press") 
         API.googleLogin()
     }
 
