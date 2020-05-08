@@ -121,7 +121,7 @@ class Login extends Component {
     switch (this.state.currentView) {
       case "signUp":
         return (
-          <form>
+          <form onSubmit={this.handleFormSubmit}>>
             <h2>Sign Up!</h2>
             <fieldset>
               <legend>Create Account</legend>
@@ -156,7 +156,7 @@ class Login extends Component {
                 </li>
               </ul>
             </fieldset>
-            <button onClick={this.handleFormSubmit}>Submit</button>
+            <button>Submit</button>
             <button type="button" onClick={() => this.changeView("logIn")}>
               Have an Account?
                 </button>
@@ -165,7 +165,8 @@ class Login extends Component {
         break;
       case "logIn":
         return (
-          <form>
+
+          <form onSubmit={this.handleFormSubmit}>
             <h2>Welcome Back!</h2>
             <fieldset>
               <legend>Log In</legend>
@@ -197,7 +198,8 @@ class Login extends Component {
                 </li>
               </ul>
             </fieldset>
-            <button onClick={this.locallogin}>Login</button>
+            <button>Login</button>
+
             <h6> Or Login Using...</h6>
             <Google />
             <button type="button" onClick={() => this.changeView("signUp")}>
