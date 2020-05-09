@@ -103,7 +103,13 @@ section#entry-page form button {
   border-radius: 5px;
   background: #fff;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  background-color: #4CAF50;
+  color: white;
+  cursor: pointer;
+  
 }
+
+
 section#entry-page form button:hover {
   background-color: #eef;
   border: 1px solid #aaf;
