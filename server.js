@@ -4,6 +4,7 @@ const mongoose= require("mongoose")
 const bodyParser = require('body-parser')
 
 const messages = require('./routes/api/messages')
+const watson = require('./routes/api/watson');
 
 const cookieSession = require('cookie-session');
 const passport = require('passport');
@@ -67,7 +68,7 @@ mongoose.connect(process.env.MONGODB_URI ||  mongodb, {useNewUrlParser: true})
 //use Routes
 app.use('/api/messages', messages)
 app.use(routes);
-
+app.use('/api/watson', watson);
 
 
 

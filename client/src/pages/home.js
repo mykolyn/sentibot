@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Chatbox from "../Components/chatbox/chatbox.js"
+import Chatbox from "../Components/chatbox/Chatbox"
 import AppNavBar from "../Components/AppNavbar.js"
 
 
