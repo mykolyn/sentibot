@@ -7,21 +7,6 @@ const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
 
-encyptPass = function (plainpassword) {
-
-    return bcrypt.hash(plainpassword, saltRounds, function (err, hash) {
-        // Store hash in your password DB.
-
-        if (err) {
-            console.log(err)
-        }
-        else {
-            console.log("hash:" + hash)
-            return hash
-        }
-    });
-}
-
 
 passport.serializeUser((user, done) => {
     done(null, user.id);
