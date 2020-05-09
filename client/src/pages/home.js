@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import Chatbox from "../Components/chatbox/Chatbox"
-import AppNavBar from "../Components/AppNavbar.js"
-
+import Chatbox from "../Components/chatbox/chatbox"
+import AppNavBar from "../Components/AppNavbar"
+import HistoryBtn from "../Components/historyBtn"
+import "../css/chatbot.css"
 
 class Home extends Component {
     render () {
@@ -13,7 +14,9 @@ class Home extends Component {
            <div>
                <AppNavBar />
                 <h4>Welcome to Home</h4>
+                
                 <Chatbox currentUser={user} />
+                <HistoryBtn />
            </div>
         )
     }

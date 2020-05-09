@@ -20,13 +20,14 @@ class Chatbox extends Component {
     axios.post('/api/watson/analyzer', {text: message.data.text})
       .then(res => {
         const analysisResults = res.data;
-        console.log(res.data);
+        // console.log(res.data);
         let sentiment = analysisResults.result.sentiment.document.label;
         let sentimentValue = Math.abs(analysisResults.result.sentiment.document.score) * 100;
         let value = sentimentValue.toFixed(2)
         // emotion calculated are sadness, joy, fear, disgust, and anger
         const emotions = analysisResults.result.emotion.document.emotion;
         let emotionVals = [];
+
         for (let emotion in emotions) {
           emotionVals.push({ emotion: emotion, value: emotions[emotion] })
         }
@@ -54,7 +55,7 @@ class Chatbox extends Component {
   };
   
   render() {
-    return (<div>
+    return (<div className="launcher-container">
       <Launcher
         agentProfile={{
           teamName: 'SentiBot',
@@ -64,7 +65,6 @@ class Chatbox extends Component {
         messageList={this.state.messageList}
         showEmoji
       />
-      
     </div>)
   }
 }

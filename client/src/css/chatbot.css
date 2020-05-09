@@ -1,3 +1,25 @@
 .sc-header--img {
     width: 95px;
 }
+.sc-launcher, .sc-open-icon, .sc-closed-icon {
+    right: 30vw !important;
+    bottom: 40vh !important;
+    width: 150px !important;
+    height: 150px !important;
+}
+.sc-chat-window {
+    right: calc(50vw - 185px);
+}
+.sc-launcher.opened {
+    display: none;
+}
+.history-btn {
+    width: 150px;
+    padding: 10px;
+    border: solid 8px #4E8CFF;
+    border-radius: 50%;
+    margin-left: 30vw;
+    margin-top: calc(60vh - 64px - 37px - 150px);
+}
+
+(.launcher-container .sc-chat-window.closed) ~ (.history-container .history-btn) { display: none; }
