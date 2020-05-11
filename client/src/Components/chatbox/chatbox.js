@@ -173,7 +173,8 @@ class Chatbox extends Component {
     }
     emotionVals.sort(function (a, b) { return b.value - a.value });
 
-    setTimeout(() => this._sendMessage(`Based on what you said, you may come across as ${value}% ${sentiment}to the other person.`), 500);
+    //setTimeout(() => this._sendMessage(`Based on what you said, you may come across as ${value}% ${sentiment}to the other person.`), 500);
+    setTimeout(() => this._sendMessage(`Based on what you said, you may come across as ${sentiment} to the other person.`), 500);
     setTimeout(() => this._sendMessage(`It sounds like you're feeling more ${emotionVals[0].emotion}. We can revise your statement if you want, otherwise you're ready to tell this to the other person!`), 1500);
     console.log(this.state.messageList)
   }
