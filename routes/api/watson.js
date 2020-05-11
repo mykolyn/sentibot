@@ -40,13 +40,17 @@ router.post('/analyzer', (req,res) => {
       message2: `It sounds like your feeling more ${emotionVals[0].emotion } than the other emotions in my database.`
     };
 
-    Chat.create({
-      userMsg: req.body.text,
-      botMsg: messages
-    });
-
     res.send(messages);
   });
+})
+
+router.post('/chat', (req,res) => {
+  Chat.create({
+    userMsg: req.body.userMsg,
+    botMsg: req.body.botMsg
+  });
+
+  res.status(200).end();
 })
 
 module.exports = router;
