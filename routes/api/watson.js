@@ -1,6 +1,6 @@
 const router = require('express').Router();
+const Chat = require('../../models/chat');
 require("dotenv").config();
-console.log('test');
 
 const NaturalLanguageUnderstandingV1 = require('ibm-watson/natural-language-understanding/v1');
 const { IamAuthenticator } = require('ibm-watson/auth');
@@ -22,7 +22,31 @@ router.post('/analyzer', (req,res) => {
     }
   };
 
-  naturalLanguageUnderstanding.analyze(analyzeParams).then(analysisResults => res.send(analysisResults));
+  naturalLanguageUnderstanding.analyze(analyzeParams).then(analysisResults => {
+    let sentiment = analysisResults.result.sentiment.document.label;
+    let sentimentValue = Math.abs(analysisResults.result.sentiment.document.score) * 100;
+    let value = sentimentValue.toFixed(2)
+    // emotion calculated are sadness, joy, fear, disgust, and anger
+    const emotions = analysisResults.result.emotion.document.emotion;
+    let emotionVals = [];
+
+    for (let emotion in emotions) {
+      emotionVals.push({ emotion: emotion, value: emotions[emotion] })
+    }
+    emotionVals.sort(function(a, b) {return b.value - a.value} );
+
+    const messages = {
+      message1: `Based on what you said, I calculated that you are ${value}% ${sentiment}.`,
+      message2: `It sounds like your feeling more ${emotionVals[0].emotion } than the other emotions in my database.`
+    };
+
+    Chat.create({
+      userMsg: req.body.text,
+      botMsg: messages
+    });
+
+    res.send(messages);
+  });
 })
 
 module.exports = router;
