@@ -1,0 +1,9 @@
+.avatar {
+    width: 60px;
+    height: 55px;
+    border-radius: 50%;
+    margin: 3px 3px;
+}
+.nav-wrapper {
+    background: #4E8CFF;
+}

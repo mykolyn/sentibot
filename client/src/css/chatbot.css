@@ -14,12 +14,22 @@
     display: none;
 }
 .history-btn {
+    position: absolute;
     width: 150px;
     padding: 10px;
     border: solid 8px #4E8CFF;
     border-radius: 50%;
-    margin-left: 30vw;
-    margin-top: calc(60vh - 64px - 37px - 150px);
+    left: 30vw;
+    bottom: 40vh;
 }
+.history {
+    position: absolute;
+    left: 27vw;
+    bottom: 62vh;
+}
+.chat-bot {
+    position: absolute;
+    right: 24vw;
+    bottom: 62vh;
 
-(.launcher-container .sc-chat-window.closed) ~ (.history-container .history-btn) { display: none; }
+}

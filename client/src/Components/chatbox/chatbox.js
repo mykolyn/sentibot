@@ -9,7 +9,8 @@ class Chatbox extends Component {
   constructor() {
     super();
     this.state = {
-      messageList: []
+      messageList: [],
+      chatBoxOpen: false
     };
   };
 
@@ -60,6 +61,7 @@ class Chatbox extends Component {
 
   render() {
     return (<div className="launcher-container">
+      {!this.state.chatBoxOpen && <h4 className="chat-bot">Chat with SentiBot</h4>}
       <Launcher
         agentProfile={{
           teamName: 'SentiBot',
@@ -68,6 +70,12 @@ class Chatbox extends Component {
         onMessageWasSent={this._onMessageWasSent.bind(this)}
         messageList={this.state.messageList}
         showEmoji
+        handleClick={() => {
+          const newChatBoxOpen = !this.state.chatBoxOpen;
+          this.setState({ chatBoxOpen: newChatBoxOpen });
+          this.props.setChatBoxOpen(newChatBoxOpen);
+        }}
+        isOpen={this.state.chatBoxOpen}
       />
     </div>)
   }
