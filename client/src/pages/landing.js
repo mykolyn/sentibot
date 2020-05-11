@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import Chatbox from "../Components/chatbox/chatbox"
 import AppNavBar from "../Components/AppNavbar.js"
+ import Jumbotron from "../Components/Jumbotron/Jumbotron"
 
 
-class Home extends Component {
+class Landing extends Component {
     render () {
         const user = {
             id: 12345,
@@ -12,11 +12,11 @@ class Home extends Component {
         return (
            <div>
                <AppNavBar />
-                <h4>Welcome to Home</h4>
-                <Chatbox currentUser={user} />
+           <Jumbotron/>
+                <h4>Welcome to landing page</h4>
            </div>
         )
     }
 };
 
-export default Home;
+export default Landing;

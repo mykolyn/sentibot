@@ -7,7 +7,6 @@ import React, { Component } from "react";
 import { Link, Redirect } from "react-router-dom";
 // import "./style.css";
 import API from "../utils/Api";
-
 class AppNavbar extends Component {
 
     state = {
@@ -17,8 +16,8 @@ class AppNavbar extends Component {
 
     componentDidMount() {
         this.checkUser()
-      }
-    
+    }
+
 
     checkUser = () => {
         // console.log(event.target.value)
@@ -31,7 +30,7 @@ class AppNavbar extends Component {
 
                     console.log("in redirect")
                     // return <Redirect to="/login" />
-                    this.setState({ redirect: "Yes" })
+                    //this.setState({ redirect: "Yes" })
                 }
                 else {
                     console.log("in setstate")
@@ -44,29 +43,60 @@ class AppNavbar extends Component {
             // .then(BrowserRouter.push('/login'))
             .catch(err => console.log(err));
     }
-//logout 
+    //logout 
     logout = () => {
 
         API.logout()
-          .then(() => this.setState({ user: null,redirect:"Yes" }))
-        //  .then(()=>console.log("logged out"))
-      }
+            .then(() => {
+                this.setState({ user: null, redirect: "Yes" })
+                //window.location.reload()
+                //  .then(()=>console.log("logged out"))
+            })
+    }
+
+
 
     render() {
         return (
-            this.state.redirect ?<Redirect to="/" /> :   
-            <nav>
-                <div className="nav-wrapper">
-                    <a href="#" className="brand-logo avatar"><img src="https://via.placeholder.com/50"></img></a>
-                    <ul id="nav-mobile" className="right hide-on-med-and-down">
-                        <li><a onClick={() => window.location = '/history'}>history</a></li>
-                        <li><a onClick={this.logout}>logout</a></li>                   
-                        <li className="active">
-                            <a href="#">User: {this.state.user}</a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
+            this.state.redirect ? <Redirect to="/home" /> :
+                <nav>
+                    <div className="nav-wrapper">
+                        <a href="#" className="brand-logo avatar"><img src="../assets/animal-kingdom.png"></img></a>
+                        <ul id="nav-mobile" className="right hide-on-med-and-down">
+                         
+
+                            <li>
+                                {!this.state.user ?
+                                    <a onClick={() => window.location = '/login'}>Login</a>
+                                    :
+                                    <a onClick={this.logout}>Logout</a>
+                                }
+                            </li>
+                            <li>
+                                {this.state.user ?
+                                    <li><a onClick={() => window.location = '/home'}>Chat</a></li>:
+                                    <li><a href="#"></a></li>
+                                }
+                            </li>
+                            <li>
+                                {this.state.user ?
+                                    <li><a onClick={() => window.location = '/history'}>History</a></li>:
+                                    <li><a href="#"></a></li>
+                                }
+                            </li>
+
+                            {/* <li><a onClick={() => window.location = '/login'}>login</a></li>
+                                <li><a onClick={this.logout}>logout</a></li> */}
+                            {/* <li><a onClick={() => window.location = '/home'}>chat</a></li>
+
+                            <li><a onClick={() => window.location = '/history'}>history</a></li> */}
+
+   <li className="active">
+                                <a href="#">User: {this.state.user}</a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
         )
     }
 

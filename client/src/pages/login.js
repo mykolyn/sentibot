@@ -1,8 +1,9 @@
 import React, { Component } from "react";
-import Google from "./google.js";
+import Google from "../Components/google/google.js";
 import API from "../utils/Api";
 import { Redirect } from "react-router-dom";
 import "../css/login.css";
+import AppNavBar from "../Components/AppNavbar.js"
 
 class Login extends Component {
 
@@ -241,6 +242,7 @@ class Login extends Component {
     return (
       this.state.redirect ? <Redirect to="/home" /> :
         <div>
+<AppNavBar/>
           <h4>Welcome to SentiBot. Please Log in.</h4>
           {/* <button onClick={() => window.location = '/home'}>Login</button> */}
           <section id="entry-page">{this.currentView()}</section>;
