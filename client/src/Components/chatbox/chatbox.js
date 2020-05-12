@@ -278,8 +278,13 @@ class Chatbox extends Component {
     var welcomeMessage = "Hi there! I'm here to help resolve your conflict through I-statements. Before we start, tell me what happened."
     this._sendMessage(welcomeMessage)
 
-
+ }
+    
+  componentDidUpdate() {
+    console.log("hello from comp did update----------------------------------")
   }
+
+ 
   //bot reply
   _sendMessage(text) {
     if (text.length > 0) {
