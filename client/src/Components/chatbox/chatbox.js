@@ -66,7 +66,7 @@ class Chatbox extends Component {
             this.setState({
               a: this.state.b,
               b: 0,
-              scoreCheck:true
+              scoreCheck: true
             })
             console.log('a should be a num' + this.state.a)
           } else {
@@ -83,29 +83,56 @@ class Chatbox extends Component {
 
         var youStatementCheck = () => {
           console.log("running youCheck")
-          this.setState({
-            youCheck: statement.text.toLowerCase().includes("you")
-          })
-          console.log(this.state.youCheck)
+          if (statement.text.toLowerCase().includes("you")) {
+            this.setState({
+              youCheck: true
+            })
+            setTimeout(() => this._sendMessage(`you I`), 500, console.log("run if true" + this.state.youCheck))
+            // console.log("youcheck" + this.state.youCheck)
+          } else {
+            this.setState({
+              youCheck: false
+            })
+            setTimeout(() => this._sendMessage(`go on..`), 500, console.log("run if false" + this.state.youCheck))
+
+
+          }
+
+
+
+
+          //console.log(this.state.youCheck)
+
+          // this.state.youCheck ?
+          //   setTimeout(() => this._sendMessage(`you I`), 500, console.log("run if true" + this.state.youCheck))
+          // :
+          //   setTimeout(() => this._sendMessage(`go on..`), 500, 
+          //this.setState({youCheck: !this.state.youCheck }), 
+          //  console.log("run if false" + this.state.youCheck))
           // setTimeout(() => this._sendMessage(`Okay lets try not to use “you” in your statement, instead describe what happened.
           //   `), 500)
         }
+        // console.log("youuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu")
+        // youStatementCheck()
 
         var contentCheck = () => {
           console.log("running contentCheck")
           //youStatementCheck()
           if (statement.text) {
+            //youStatementCheck()
+
             this.setState({
               contentCheck: true
             })
-            console.log("contentcheck" + this.contentCheck)
+
+            console.log("contentcheck" + this.state.contentCheck)
           }
 
           this.state.contentCheck ?
             setTimeout(() => this._sendMessage(`Im sorry to hear that, how does that make you feel?`), 500, console.log("run if true" + this.state.feelCheck))
             :
             setTimeout(() => this._sendMessage(`Try repharsing it`), 500, this.setState({
-              youCheck: true
+              contentCheck: true
             }), console.log("run if false" + this.state.feelCheck))
 
         }
@@ -113,7 +140,7 @@ class Chatbox extends Component {
 
 
         var feelingCheck = () => {
-          console.log("running feelingCheck")  
+          console.log("running feelingCheck")
           if (statement.text.toLowerCase().includes("feel")) {
             this.setState({
               feelCheck: true
@@ -124,9 +151,9 @@ class Chatbox extends Component {
           this.state.feelCheck ?
             setTimeout(() => this._sendMessage(`I see, why do you feel that way?`), 500, console.log("run if true" + this.state.feelCheck))
             :
-            setTimeout(() => this._sendMessage(`Try using the keyword "feel" in your statement`), 500, this.setState({
-              youCheck: true
-            }), console.log("run if false" + this.state.feelCheck))
+            setTimeout(() => this._sendMessage(`Try using the keyword "feel" in your statement`), 500,
+              //this.setState({ feelCheck: false}), 
+              console.log("run if false" + this.state.feelCheck))
 
           // this.setState({
           //   feelCheck: true
@@ -143,7 +170,7 @@ class Chatbox extends Component {
 
         var whyCheck = () => {
           console.log("running whyCheck")
-          updateScore(keywordLength)          
+          updateScore(keywordLength)
           scoreCheck()
 
           if (this.state.scoreCheck) {
@@ -163,25 +190,26 @@ class Chatbox extends Component {
         }
 
 
-   // emotion calculated are sadness, joy, fear, disgust, and anger
-   var sentimentCheck = ()=>{
-        
-    const emotions = analysisResults.result.emotion.document.emotion;
-    let emotionVals = [];
-    for (let emotion in emotions) {
-      emotionVals.push({ emotion: emotion, value: emotions[emotion] })
-    }
-    emotionVals.sort(function (a, b) { return b.value - a.value });
+        // emotion calculated are sadness, joy, fear, disgust, and anger
+        var sentimentCheck = () => {
 
-    //setTimeout(() => this._sendMessage(`Based on what you said, you may come across as ${value}% ${sentiment}to the other person.`), 500);
-    setTimeout(() => this._sendMessage(`Based on what you said, you may come across as ${sentiment} to the other person.`), 500);
-    setTimeout(() => this._sendMessage(`It sounds like you're feeling more ${emotionVals[0].emotion}. We can revise your statement if you want, otherwise you're ready to tell this to the other person!`), 1500);
-    console.log(this.state.messageList)
-  }
+          const emotions = analysisResults.result.emotion.document.emotion;
+          let emotionVals = [];
+          for (let emotion in emotions) {
+            emotionVals.push({ emotion: emotion, value: emotions[emotion] })
+          }
+          emotionVals.sort(function (a, b) { return b.value - a.value });
+
+          //setTimeout(() => this._sendMessage(`Based on what you said, you may come across as ${value}% ${sentiment}to the other person.`), 500);
+          setTimeout(() => this._sendMessage(`Based on what you said, you may come across as ${sentiment} to the other person.`), 500);
+          setTimeout(() => this._sendMessage(`It sounds like you're feeling more ${emotionVals[0].emotion}. We can revise your statement if you want, otherwise you're ready to tell this to the other person!`), 1500);
+          console.log(this.state.messageList)
+        }
         //conditional chain
         var commandList = [this.state.contentCheck, this.state.feelCheck, this.state.whyCheck, this.state.sentimentCheck]
         var botReply = [contentCheck, feelingCheck, whyCheck, sentimentCheck]
-        var debug = ["contentCheck", "feelCheck", "whyCheck","sentimentCheck"]
+        var debug = ["youStatementCheck1", "contentCheck", "youStatementCheck2", "feelCheck", "youStatementCheck3", "whyCheck", "youStatementCheck", "sentimentCheck"]
+
         var runBot = () => {
           // console.log("running runBot")
           // console.log("initial states, a state: " + this.state.a + " b state: " + this.state.b)
@@ -196,7 +224,12 @@ class Chatbox extends Component {
             console.log("----run loop----" + commandList[i])
             console.log(debug[i] + " " + commandList[i])
 
+            if (statement.text.toLowerCase().includes("you") === true) {
+              return setTimeout(() => this._sendMessage(`Try not to use "you" in your statement`), 500, console.log("run if true" + this.state.youCheck))
+            }
+
             if (commandList[i] === false) {
+
               return botReply[i](statement.text)
             }
           }
@@ -231,7 +264,7 @@ class Chatbox extends Component {
 
 
 
-     
+
       })
 
 
@@ -240,6 +273,13 @@ class Chatbox extends Component {
       });
   };
 
+  //welcome message
+  componentDidMount() {
+    var welcomeMessage = "Hi there! I'm here to help resolve your conflict through I-statements. Before we start, tell me what happened."
+    this._sendMessage(welcomeMessage)
+
+
+  }
   //bot reply
   _sendMessage(text) {
     if (text.length > 0) {
