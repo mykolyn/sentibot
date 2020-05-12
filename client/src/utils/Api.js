@@ -26,8 +26,10 @@ export default {
     localLogin: function (data) {
         console.log("in login")
         return axios.post("/api/localLogin", data)
+    },
+    chatLog: function (data) {
+        return axios.post("/api/watson/analyzer")
     }
-
 
 
 }

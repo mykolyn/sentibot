@@ -1,11 +1,9 @@
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 
-
 import React, { Component } from "react";
-// import { BrowserRouter as Router, Route } from "react-router-dom";
-import { Link, Redirect } from "react-router-dom";
-// import "./style.css";
+import { Redirect } from "react-router-dom";
+import "../css/navbar.css"
 import API from "../utils/Api";
 
 class AppNavbar extends Component {
@@ -17,8 +15,8 @@ class AppNavbar extends Component {
 
     componentDidMount() {
         this.checkUser()
-      }
-    
+    }
+
 
     checkUser = () => {
         // console.log(event.target.value)
@@ -44,83 +42,39 @@ class AppNavbar extends Component {
             // .then(BrowserRouter.push('/login'))
             .catch(err => console.log(err));
     }
-//logout 
+    //logout 
     logout = () => {
 
         API.logout()
-          .then(() => this.setState({ user: null,redirect:"Yes" }))
+            .then(() => this.setState({ user: null, redirect: "Yes" }))
         //  .then(()=>console.log("logged out"))
-      }
+    }
 
     render() {
         return (
-            this.state.redirect ?<Redirect to="/" /> :   
-            <nav>
-                <div className="nav-wrapper">
-                    <a href="#" className="brand-logo avatar"><img src="https://via.placeholder.com/50"></img></a>
-                    <ul id="nav-mobile" className="right hide-on-med-and-down">
-                        <li><a onClick={() => window.location = '/history'}>history</a></li>
-                        <li><a onClick={this.logout}>logout</a></li>                   
-                        <li className="active">
-                            <a href="#">User: {this.state.user}</a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
+            this.state.redirect ? <Redirect to="/" /> :
+                <nav>
+                    <div className="nav-wrapper">
+                        <a 
+                            onClick={() => window.location = '/home'}
+                            className="brand-logo avatar">
+                            <img 
+                                className="avatar"
+                                src="https://cdn.dribbble.com/users/722835/screenshots/4082720/bot_icon.gif">
+                            </img>
+                        </a>
+                        <ul id="nav-mobile" className="right hide-on-med-and-down">
+                            <li><a onClick={() => window.location = '/history'}>history</a></li>
+                            <li><a onClick={this.logout}>logout</a></li>
+                            <li className="active">
+                                <a href="#">User: {this.state.user}</a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
         )
     }
 
 }
-
-
-// import React, {Component} from 'react';
-// import{
-//     Collapse,
-//     Navbar,
-//     NavbarToggler,
-//     NavbarBrand,
-//     Nav,
-//     NavItem,
-//     NavLink,
-//     Container
-// } from 'reactstrap';
-
-// class AppNavbar extends Component {
-//     state={
-//         isOpen: false
-//     }
-//     toggle = () => {
-//         alert()
-//         this.setState({
-//             isOpen: !this.state.isOpen
-
-//         })
-//     }
-// render(){
-//     return(
-//         <div>
-//       <Navbar color="dark" dark expand="sm" className="mb-5">
-//           <Container>
-//         <NavbarBrand href="/" className="mr-auto">SentiTalk</NavbarBrand>
-//         <NavbarToggler onClick={this.toggler}  />
-//         <Collapse isOpen={this.state.isOpen} navbar>
-//           <Nav className ="ml-auto" navbar>
-//             <NavItem>
-//               <NavLink href="https://github.com/mykolyn/sentibot">Github</NavLink>
-//             </NavItem>
-//             <NavItem>
-//               <NavLink href="/">Chat</NavLink>
-//             </NavItem>
-//             <NavItem>
-//               <NavLink href="/">History</NavLink>
-//             </NavItem>
-//           </Nav>
-//         </Collapse>
-//       </Container>
-//       </Navbar>
-//     </div>
-//     )
-// }
-// }
 
 export default AppNavbar

@@ -1,3 +1,35 @@
 .sc-header--img {
     width: 95px;
 }
+.sc-launcher, .sc-open-icon, .sc-closed-icon {
+    right: 30vw !important;
+    bottom: 40vh !important;
+    width: 150px !important;
+    height: 150px !important;
+}
+.sc-chat-window {
+    right: calc(50vw - 185px);
+}
+.sc-launcher.opened {
+    display: none;
+}
+.history-btn {
+    position: absolute;
+    width: 150px;
+    padding: 10px;
+    border: solid 8px #4E8CFF;
+    border-radius: 50%;
+    left: 30vw;
+    bottom: 40vh;
+}
+.history {
+    position: absolute;
+    left: 27vw;
+    bottom: 62vh;
+}
+.chat-bot {
+    position: absolute;
+    right: 24vw;
+    bottom: 62vh;
+
+}

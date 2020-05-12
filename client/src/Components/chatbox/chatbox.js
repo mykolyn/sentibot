@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import axios from 'axios';
-import {Launcher} from 'react-chat-window';
+import { Launcher } from 'react-chat-window';
 import "../../css/chatbot.css"
 
 class Chatbox extends Component {
@@ -9,37 +9,43 @@ class Chatbox extends Component {
   constructor() {
     super();
     this.state = {
-      messageList: []
+      messageList: [],
+      chatBoxOpen: false
     };
   };
+
+  addChat(userMsg, botMsg) {
+    axios.post('/api/watson/chat', { userMsg: userMsg, botMsg: botMsg });
+  }
 
   _onMessageWasSent(message) {
     this.setState({
       messageList: [...this.state.messageList, message]
     })
-    axios.post('/api/watson/analyzer', {text: message.data.text})
-      .then(res => {
-        const analysisResults = res.data;
-        console.log(res.data);
-        let sentiment = analysisResults.result.sentiment.document.label;
-        let sentimentValue = Math.abs(analysisResults.result.sentiment.document.score) * 100;
-        let value = sentimentValue.toFixed(2)
-        // emotion calculated are sadness, joy, fear, disgust, and anger
-        const emotions = analysisResults.result.emotion.document.emotion;
-        let emotionVals = [];
-        for (let emotion in emotions) {
-          emotionVals.push({ emotion: emotion, value: emotions[emotion] })
-        }
-        emotionVals.sort(function(a, b) {return b.value - a.value} );
 
-        setTimeout(() => this._sendMessage(`Based on what you said, I calculated that you are ${value}% ${sentiment}.`), 500);
-        setTimeout(() => this._sendMessage(`It sounds like your feeling more ${emotionVals[0].emotion } than the other emotions in my database.`), 1500);
-    })
-    .catch(err => {
-      console.log('error:', err);
-    });
+    const userMsg = message.data.text;
+    let botMsg = {};
+
+    if (message.data.text.length < 15) {
+      botMsg.message1 = "Please add more words for me to better understand.";
+      this._sendMessage(botMsg.message1);
+      this.addChat(userMsg, botMsg);
+    }
+    else {
+      axios.post('/api/watson/analyzer', { text: message.data.text })
+        .then(res => {
+          botMsg.message1 = res.data.message1;
+          botMsg.message2 = res.data.message2;
+          setTimeout(() => this._sendMessage(botMsg.message1), 500);
+          setTimeout(() => this._sendMessage(botMsg.message2), 1500);
+          this.addChat(userMsg, botMsg);
+        })
+        .catch(err => {
+          console.log('error:', err);
+        });
+    }
   };
- 
+
   _sendMessage(text) {
     if (text.length > 0) {
       this.setState({
@@ -52,9 +58,10 @@ class Chatbox extends Component {
     }
     console.log(text)
   };
-  
+
   render() {
-    return (<div>
+    return (<div className="launcher-container">
+      {!this.state.chatBoxOpen && <h4 className="chat-bot">Chat with SentiBot</h4>}
       <Launcher
         agentProfile={{
           teamName: 'SentiBot',
@@ -63,8 +70,13 @@ class Chatbox extends Component {
         onMessageWasSent={this._onMessageWasSent.bind(this)}
         messageList={this.state.messageList}
         showEmoji
+        handleClick={() => {
+          const newChatBoxOpen = !this.state.chatBoxOpen;
+          this.setState({ chatBoxOpen: newChatBoxOpen });
+          this.props.setChatBoxOpen(newChatBoxOpen);
+        }}
+        isOpen={this.state.chatBoxOpen}
       />
-      
     </div>)
   }
 }
