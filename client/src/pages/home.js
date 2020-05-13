@@ -5,14 +5,21 @@ import API from "../utils/Api";
 import "./home.css"
 import Footer from "../Components/Footer/Footer.js"
 import Chatcards from "../Components/Chatcards/Chatcards"
+import Sentimood from "../Components/Sentimood/Sentimood";
+import SentimoodPos from "../Components/SentimoodPos/SentimoodPos";
+
+import axios from 'axios';
 
 class Home extends Component {
-
-    state = {
+    constructor(props) {
+        super(props);
+    this.state = {
         user: null,
-        redirect: ""
+        redirect: "",
+        sentiScore: "neutral",
+        seconds: 0
     };
-
+    }
     checkUser = () => {
         // console.log(event.target.value)
         API.checkUser()
@@ -38,9 +45,32 @@ class Home extends Component {
             .catch(err => console.log(err));
     }
 
+
+    tick() {
+        axios.get('/exercises/')
+        .then(response => {
+          this.setState({sentiScore: response.data.sentiScore })
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+      }
+
     componentDidMount() {
+        console.log("2222222running didmount in home.js")
         this.checkUser()
+        this.interval = setInterval(() => this.tick(), 5000);
+
+        // axios.get('/exercises/')
+        // .then(response => {
+        //   this.setState({sentiScore: response.data.sentiScore })
+        // })
+        // .catch((error) => {
+        //   console.log(error);
+        // })
     }
+
+   
 
     render() {
         const user = {
@@ -53,11 +83,23 @@ class Home extends Component {
                 {/* <iframe ></iframe> */}
                 <div className="container" style={{marginTop:"5%", marginBottom:"1%"}}>
                     <h1>Welcome {this.state.user}</h1>
+                    <div>
+        Seconds: {this.state.sentiScore}
+      </div>
                 </div>
 
 
                 
-<Chatcards/>
+<Chatcards/>    
+<div>
+<p style={{marginLeft:"70px"}}>The color will change based on the sentiment score of your most recent message with our chatbot!</p>
+</div>
+<div className="container" style={{textAlign:"center", marginBottom:"5%", marginTop:"-10%"}}>
+        {this.state.sentiScore==="positive"?<SentimoodPos/> : <Sentimood/>}
+       
+    
+    
+</div>
 
 
 

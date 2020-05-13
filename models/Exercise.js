@@ -7,6 +7,7 @@ const exerciseSchema = new Schema({
   description: { type: String, required: false },
   duration: { type: Number, required: false },
   date: { type: Date, required: false },
+  sentiScore: {type: String, required: false}
 }, {
   timestamps: true,
 });

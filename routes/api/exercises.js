@@ -12,12 +12,13 @@ router.route('/add').post((req, res) => {
   const description = req.body.description;
  // const duration = Number(req.body.duration);
  // const date = Date.parse(req.body.date);
-
+const sentiScore = req.body.sentiScore
   const newExercise = new Exercise({
   //  username,
     description,
  //   duration,
    // date,
+   sentiScore
   });
 
   newExercise.save()

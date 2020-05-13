@@ -234,6 +234,8 @@ checkUser = () => {
           setTimeout(() => this._sendMessage(`Based on what you said, you may come across as ${sentiment} to the other person.`), 500);
           setTimeout(() => this._sendMessage(`It sounds like you're feeling more ${emotionVals[0].emotion}. We can revise your statement if you want, otherwise you're ready to tell this to the other person!`), 1500);
           console.log(this.state.messageList)
+
+
         }
         //conditional chain
         var commandList = [this.state.contentCheck, this.state.feelCheck, this.state.whyCheck, this.state.sentimentCheck]
@@ -250,15 +252,18 @@ checkUser = () => {
 
           // console.log("states after checking/updating scores a state " + this.state.a + " b state: " + this.state.b)
           this.setState({
-            description: statement.text
+            description: statement.text,
+            sentiScore: analysisResults.result.sentiment.document.label
           })
 console.log("aaaaaaaaaaaa" + this.state.description)
+console.log("ffffffffffff" + this.state.sentiScore)
 
 const exercise = {
   username: this.state.username,
   description: this.state.description,
   duration: this.state.duration,
-  date: this.state.date
+  date: this.state.date,
+  sentiScore: this.state.sentiScore
 }
 
 console.log(exercise);

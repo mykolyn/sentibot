@@ -78,9 +78,9 @@ class Jumbotron extends Component {
        <div className="overlay" style={{marginTop:"2%", marginBottom:"2%"}}>
        <h1>Say what you want to say</h1>
        <br/>
-       <p className="lead">Having trouble resolving a conflict? We're here to help :)</p>
+       <p className="lead">Having trouble resolving a personal or professional conflict? We're here to help you effectively get your point across</p>
           <hr className="sm" />
-          <p>We use machine learning to guide you through assertive conflict resolution methods. Powered by IBM watson applied theories. Our mission is to teach you effective communication skills.</p>
+          <p>We use machine learning to guide you through assertive conflict resolution methods. Powered by IBM watson and applied theories. Our mission is to teach you effective communication skills.</p>
                  {/* <p>
         <a className="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p> */}
       </div>
