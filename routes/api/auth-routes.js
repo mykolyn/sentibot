@@ -1,6 +1,16 @@
 const router = require('express').Router();
 const passport = require('passport');
 
+let redirectUrl
+
+
+if (process.env.NODE_ENV === 'production') {
+    redirectUrl = "https://sleepy-atoll-40002.herokuapp.com/"
+
+}
+else {
+    redirectUrl = "http://localhost:3000"
+}
 
 // auth logout
 router.get('/logout', (req, res) => {
@@ -22,13 +32,15 @@ router.get('/google/redirect', passport.authenticate('google'), (req, res) => {
     // res.redirect('/profile');
     console.log("google redirect")
     // var token = req.username;
-    res.redirect("https://sleepy-atoll-40002.herokuapp.com/");
+    // res.redirect("https://sleepy-atoll-40002.herokuapp.com/");
+    res.redirect(redirectUrl)
+
 });
 
 
 const authCheck = (req, res, next) => {
-    console.log("in user check"+req.user)
-    if(!req.user){
+    console.log("in user check" + req.user)
+    if (!req.user) {
 
         console.log("in if statement")
         // res.send("test data from user check")
@@ -40,7 +52,7 @@ const authCheck = (req, res, next) => {
 };
 
 router.get('/checkuser', authCheck, (req, res) => {
-   console.log("in user fetch:"+req.user)
+    console.log("in user fetch:" + req.user)
     res.json({ user: req.user });
 });
 
@@ -48,39 +60,41 @@ router.get('/checkuser', authCheck, (req, res) => {
 
 
 router.post('/signup', passport.authenticate('local-signup', {
-    successRedirect : '/api/newuserCreated', // redirect to the secure profile section
-    failureRedirect : '/api/userExist' // redirect back to the signup page if there is an error
+    successRedirect: '/api/newuserCreated', // redirect to the secure profile section
+    failureRedirect: '/api/userExist' // redirect back to the signup page if there is an error
     // failureFlash : true // allow flash messages
 }));
 
 
-router.get('/userExist',(req,res)=>{
+router.get('/userExist', (req, res) => {
     res.send("UserExist");
 
 })
 
-router.get('/newuserCreated',(req,res)=>{
-    res.redirect("https://sleepy-atoll-40002.herokuapp.com/");
+router.get('/newuserCreated', (req, res) => {
+    // res.redirect("https://sleepy-atoll-40002.herokuapp.com/");
+    res.redirect(redirectUrl)
 
 })
 
 //local login
 
-router.post('/localLogin',passport.authenticate('local-login', {
-    successRedirect : '/api/loginsuccess', // redirect to the secure profile section
-    failureRedirect : '/api/loginfailed' // redirect back to the signup page if there is an error
+router.post('/localLogin', passport.authenticate('local-login', {
+    successRedirect: '/api/loginsuccess', // redirect to the secure profile section
+    failureRedirect: '/api/loginfailed' // redirect back to the signup page if there is an error
     // failureFlash : true // allow flash messages
 }))
 
 
-router.get('/loginfailed',(req,res)=>{
+router.get('/loginfailed', (req, res) => {
     res.send("LoginFailed");
 
 })
 
-router.get('/loginsuccess',(req,res)=>{
+router.get('/loginsuccess', (req, res) => {
     console.log("login success")
-    res.redirect("https://sleepy-atoll-40002.herokuapp.com/");
+    // res.redirect("https://sleepy-atoll-40002.herokuapp.com/");
+    res.redirect(redirectUrl)
 
 })
 
