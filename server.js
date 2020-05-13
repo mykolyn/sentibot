@@ -1,4 +1,4 @@
-
+require("dotenv").config();
 const express = require("express")
 const mongoose= require("mongoose")
 const bodyParser = require('body-parser')
@@ -9,7 +9,6 @@ const watson = require('./routes/api/watson');
 const cookieSession = require('cookie-session');
 const passport = require('passport');
 const routes = require('./routes/api/auth-routes');
-require("dotenv").config();
 // const profileRoutes = require('./routes/profile-routes');
 const passportSetup = require('./passport-setup')
 const keys = require('./config/keys');
@@ -66,8 +65,8 @@ const mongodb = require('./config/keys').mLab.MONGODB_URI;
 mongoose.connect("mongodb://localhost/watsonDB", { useNewUrlParser: true });
 
 //use Routes
-app.use('/api/messages', messages)
 app.use(routes);
+app.use('/api/messages', messages)
 app.use('/api/watson', watson);
 
 
