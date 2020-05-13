@@ -1,11 +1,19 @@
 const router = require('express').Router();
 let Exercise = require('../../models/Exercise');
-
+//Hi sanjay
 router.route('/').get((req, res) => {
   Exercise.find()
     .then(exercises => res.json(exercises))
     .catch(err => res.status(400).json('Error: ' + err));
 });
+
+router.route('/sentiscore').get((req, res) => {
+  Exercise.find().sort({"created_at": 1}).limit(1) 
+    .then(exercises => res.json(exercises))
+    .catch(err => res.status(400).json('Error: ' + err));
+});
+
+
 
 router.route('/add').post((req, res) => {
  // const username = req.body.username;

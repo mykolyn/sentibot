@@ -13,12 +13,12 @@ import axios from 'axios';
 class Home extends Component {
     constructor(props) {
         super(props);
-    this.state = {
-        user: null,
-        redirect: "",
-        sentiScore: "neutral",
-        seconds: 0
-    };
+        this.state = {
+            user: null,
+            redirect: "",
+            sentiScore: "neutral",
+            seconds: 0
+        };
     }
     checkUser = () => {
         // console.log(event.target.value)
@@ -45,21 +45,36 @@ class Home extends Component {
             .catch(err => console.log(err));
     }
 
+    test = () => {
+        axios.get('/exercises/sentiscore')
+            .then(response => {
+                this.setState({ sentiScore: response.data.sentiScore })
+console.log("asdasdasdasdasd"+response.data.sentiScore)
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }
+
 
     tick() {
-        axios.get('/exercises/')
-        .then(response => {
-          this.setState({sentiScore: response.data.sentiScore })
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-      }
+
+        this.setState(state => ({
+            seconds: state.seconds + 1
+        }));
+        axios.get('/exercises/sentiscore')
+            .then(response => {
+                this.setState({ sentiScore: response.data.sentiScore })
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }
 
     componentDidMount() {
         console.log("2222222running didmount in home.js")
         this.checkUser()
-        this.interval = setInterval(() => this.tick(), 5000);
+        this.interval = setInterval(() => this.test(), 1000);
 
         // axios.get('/exercises/')
         // .then(response => {
@@ -70,7 +85,7 @@ class Home extends Component {
         // })
     }
 
-   
+
 
     render() {
         const user = {
@@ -81,25 +96,26 @@ class Home extends Component {
             <div>
                 <AppNavBar />
                 {/* <iframe ></iframe> */}
-                <div className="container" style={{marginTop:"5%", marginBottom:"1%"}}>
+                <div className="container" style={{ marginTop: "5%", marginBottom: "1%" }}>
                     <h1>Welcome {this.state.user}</h1>
                     <div>
+                        Seconds: {this.state.seconds}
         Seconds: {this.state.sentiScore}
-      </div>
+                    </div>
                 </div>
 
 
-                
-<Chatcards/>    
-<div>
-<p style={{marginLeft:"70px"}}>The color will change based on the sentiment score of your most recent message with our chatbot!</p>
-</div>
-<div className="container" style={{textAlign:"center", marginBottom:"5%", marginTop:"-10%"}}>
-        {this.state.sentiScore==="positive"?<SentimoodPos/> : <Sentimood/>}
-       
-    
-    
-</div>
+
+                <Chatcards />
+                <div>
+                    <p style={{ marginLeft: "70px" }}>The color will change based on the sentiment score of your most recent message with our chatbot!</p>
+                </div>
+                <div className="container" style={{ textAlign: "center", marginBottom: "5%", marginTop: "-10%" }}>
+                    {this.state.sentiScore === "positive" ? <SentimoodPos /> : <Sentimood />}
+
+
+
+                </div>
 
 
 

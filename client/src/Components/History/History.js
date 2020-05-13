@@ -28,6 +28,7 @@ export default class ChatList extends Component {
     axios.get('/exercises/')
       .then(response => {
         this.setState({ exercises: response.data })
+        console.log(response.data)
       })
       .catch((error) => {
         console.log(error);
@@ -51,7 +52,7 @@ export default class ChatList extends Component {
 
   render() {
     return (
-      <div>
+      <div style={{marginTop:"10%"}}>
         <h3>Chat History</h3>
         <table className="table">
           <thead className="thead-light">
