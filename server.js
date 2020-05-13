@@ -71,6 +71,9 @@ app.use(routes);
 app.use('/api/watson', watson);
 
 
+const exercisesRouter = require('./routes/api/exercises');
+app.use('/exercises', exercisesRouter);
+
 
 const PORT = process.env.PORT || 3001;
 

@@ -2,14 +2,27 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { Launcher } from 'react-chat-window';
 import "../../css/chatbot.css"
+import API from "../../utils/Api";
 
 class Chatbox extends Component {
 
   // ========= reat chat box =========
   constructor() {
     super();
+
+    // this.onChangeUsername = this.onChangeUsername.bind(this);
+    // this.onChangeDescription = this.onChangeDescription.bind(this);
+    // this.onChangeDuration = this.onChangeDuration.bind(this);
+    // this.onChangeDate = this.onChangeDate.bind(this);
+    // this.onSubmit = this.onSubmit.bind(this);
+
+
     this.state = {
+      user: "",
+      redirect: "",
+
       messageList: [],
+      description: "",
       //runs youCheck
       contentCheck: false,
       //checks if there is you in statement
@@ -29,6 +42,23 @@ class Chatbox extends Component {
 
 
 
+checkUser = () => {
+    // console.log(event.target.value)
+    API.checkUser()
+        // .then(res => this.setState({ user: res.data.user.username }))
+        .then(res => {
+
+          
+                console.log("in setstate")
+                this.setState({ user: res.data.user.username })
+            
+        }
+
+        )
+        // .then(res=>console.log(res.data))
+        // .then(BrowserRouter.push('/login'))
+        .catch(err => console.log(err));
+}
   _onMessageWasSent(message) {
     this.setState({
       messageList: [...this.state.messageList, message]
@@ -219,6 +249,22 @@ class Chatbox extends Component {
           // scoreCheck()
 
           // console.log("states after checking/updating scores a state " + this.state.a + " b state: " + this.state.b)
+          this.setState({
+            description: statement.text
+          })
+console.log("aaaaaaaaaaaa" + this.state.description)
+
+const exercise = {
+  username: this.state.username,
+  description: this.state.description,
+  duration: this.state.duration,
+  date: this.state.date
+}
+
+console.log(exercise);
+
+axios.post('/exercises/add', exercise)
+  .then(res => console.log("data has been saved" + res.data));
 
           for (var i = 0; i < commandList.length; i++) {
             console.log("----run loop----" + commandList[i])
@@ -275,16 +321,22 @@ class Chatbox extends Component {
 
   //welcome message
   componentDidMount() {
-    var welcomeMessage = "Hi there! I'm here to help resolve your conflict through I-statements. Before we start, tell me what happened."
+    this.checkUser()
+
+    var welcomeMessage = "Hi there! I'm here to help resolve your conflict through I-statements. Before we start, tell me what happened." + this.state.user
     this._sendMessage(welcomeMessage)
 
- }
-    
-  componentDidUpdate() {
-    console.log("hello from comp did update----------------------------------")
   }
 
- 
+  // componentDidUpdate() {
+  //   console.log("hello from comp did update----------------------------------")
+
+   
+  //   console.log(this.state.description)
+  // }
+
+
+
   //bot reply
   _sendMessage(text) {
     if (text.length > 0) {

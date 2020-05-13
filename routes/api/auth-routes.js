@@ -40,7 +40,7 @@ const authCheck = (req, res, next) => {
 };
 
 router.get('/api/checkuser', authCheck, (req, res) => {
-    console.log("in user fetch:"+req.user)
+   console.log("in user fetch:"+req.user)
     res.json({ user: req.user });
 });
 
