@@ -7,7 +7,7 @@ export default {
         // window.open("https://sleepy-atoll-40002.herokuapp.com/api/google", "_self");
 
         if (process.env.NODE_ENV === 'production') {
-            window.open("https://sleepy-atoll-40002.herokuapp.com/api/google","_self");
+            window.open("https://sentitalk.herokuapp.com/api/google","_self");
         
         }
         else {
