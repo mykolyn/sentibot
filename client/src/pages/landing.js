@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import AppNavBar from "../Components/AppNavbar.js"
  import Jumbotron from "../Components/Jumbotron/Jumbotron"
+ import Background from "../assets/prism.png"
 
 
 class Landing extends Component {
@@ -10,10 +11,10 @@ class Landing extends Component {
             name: 'Test'
         }
         return (
-           <div>
+           <div style={{backgroundImage: {Background}}}>
                <AppNavBar />
            <Jumbotron/>
-                <h4>Welcome to landing page</h4>
+             
            </div>
         )
     }

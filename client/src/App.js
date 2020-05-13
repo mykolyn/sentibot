@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 // import AppNavBar from "./Components/AppNavbar"
 
+import Footer from "./Components/Footer/Footer.js"
 
 // Importing pages
 import Login from "./pages/login.js";
@@ -23,6 +24,8 @@ function App() {
         <Route exact path="/home" component={Home} />
         <Route exact path="/signup" component={SignUp} />
       </Switch>
+      {/* <div style={{backgroundColor: "red"}}>hhhhhhhhh</div> */}
+      <Footer/>
       </div>
     </Router>
   );

@@ -7,6 +7,7 @@ import React, { Component } from "react";
 import { Link, Redirect } from "react-router-dom";
 // import "./style.css";
 import API from "../utils/Api";
+import Logo from "../assets/animal-kingdom.png"
 class AppNavbar extends Component {
 
     state = {
@@ -58,10 +59,10 @@ class AppNavbar extends Component {
 
     render() {
         return (
-            this.state.redirect ? <Redirect to="/home" /> :
-                <nav>
+            this.state.redirect ? <Redirect to="/" /> :
+                <nav className="fixed-top ">
                     <div className="nav-wrapper">
-                        <a href="#" className="brand-logo avatar"><img src="../assets/animal-kingdom.png"></img></a>
+                        <a href="/" className="brand-logo avatar"><img src={Logo} style={{height:"35px", marginLeft:"20px"}}></img></a>
                         <ul id="nav-mobile" className="right hide-on-med-and-down">
                          
 
