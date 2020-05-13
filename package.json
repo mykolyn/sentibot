@@ -19,6 +19,8 @@
     "nodemon": "^1.11.0"
   },
   "dependencies": {
+    "concurrently": "^3.6.1",
+
     "axios": "^0.19.2",
     "bcrypt": "4.0.1",
     "body-parser": "^1.19.0",
