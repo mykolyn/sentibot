@@ -3,7 +3,7 @@ const passport = require('passport');
 
 
 // auth logout
-router.get('logout', (req, res) => {
+router.get('/logout', (req, res) => {
     console.log("logout backend")
     req.logout();
     res.send("success")
