@@ -11,7 +11,8 @@
     "seed": "node scripts/seedDB.js",
     "install": "cd client && npm install",
     "build": "cd client && npm run build",
-    "heroku-postbuild": "cd client && npm install && npm run build"  },
+    "heroku-postbuild": "cd client && npm install && npm run build"
+  },
   "author": "",
   "license": "ISC",
   "devDependencies": {
@@ -20,7 +21,6 @@
   },
   "dependencies": {
     "concurrently": "^3.6.1",
-
     "axios": "^0.19.2",
     "bcrypt": "4.0.1",
     "body-parser": "^1.19.0",
@@ -34,6 +34,7 @@
     "passport": "0.4.1",
     "passport-google-oauth2": "0.2.0",
     "passport-local": "1.0.0",
-    "react-router-dom": "^5.1.2"
+    "react-router-dom": "^5.1.2",
+    "path": "0.12.7"
   }
 }

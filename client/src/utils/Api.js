@@ -4,7 +4,7 @@ export default {
     googleLogin: function () {
         // axios.get("http://localhost:3001/api/google")
 
-        window.open("http://localhost:3001/api/google", "_self");
+        window.open("https://sleepy-atoll-40002.herokuapp.com/api/google", "_self");
     },
 
     checkUser: function () {
