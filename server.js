@@ -62,11 +62,11 @@ if(process.env.NODE_ENV ==="production"){
 const mongodb = require('./config/keys').mLab.MONGODB_URI;
 
 // Connect the Mongo
-mongoose.connect(process.env.MONGODB_URI ||  mongodb, {useNewUrlParser: true})
-.then(()=>console.log("mongodb connected..."))
-.catch((err)=> console.log(err));
+// mongoose.connect(process.env.MONGODB_URI ||  mongodb, {useNewUrlParser: true})
+// .then(()=>console.log("mongodb connected..."))
+// .catch((err)=> console.log(err));
 
-// mongoose.connect("mongodb://localhost/watsonDB", { useNewUrlParser: true });
+mongoose.connect("mongodb://localhost/watsonDB", { useNewUrlParser: true });
 
 //use Routes
 app.use('/api/messages', messages)
