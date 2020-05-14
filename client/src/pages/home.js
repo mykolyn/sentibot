@@ -102,8 +102,8 @@ class Home extends Component {
                 <div className="container" style={{ marginTop: "5%", marginBottom: "1%" }}>
                     <h1>Welcome {this.state.user}</h1>
                     <div>
-                        Seconds: {this.state.seconds}
-        Seconds: {this.state.sentiScore}
+                        {/* Seconds: {this.state.seconds}
+        Seconds: {this.state.sentiScore} */}
                     </div>
                 </div>
 
