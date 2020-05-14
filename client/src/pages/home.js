@@ -48,8 +48,8 @@ class Home extends Component {
     test = () => {
         axios.get('/exercises/sentiscore')
             .then(response => {
-                this.setState({ sentiScore: response.data.sentiScore })
-console.log("asdasdasdasdasd"+response.data.sentiScore)
+                this.setState({ sentiScore: response.data[0].sentiScore })
+console.log("asdasdasdasdasd"+response.data[0].sentiScore)
             })
             .catch((error) => {
                 console.log(error);
@@ -64,7 +64,7 @@ console.log("asdasdasdasdasd"+response.data.sentiScore)
         }));
         axios.get('/exercises/sentiscore')
             .then(response => {
-                this.setState({ sentiScore: response.data.sentiScore })
+                this.setState({ sentiScore: response.data[0].sentiScore })
             })
             .catch((error) => {
                 console.log(error);
