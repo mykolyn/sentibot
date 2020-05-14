@@ -5,7 +5,7 @@ let redirectUrl
 
 
 if (process.env.NODE_ENV === 'production') {
-    redirectUrl = "https://sleepy-atoll-40002.herokuapp.com/"
+    redirectUrl = "https://sentitalk.herokuapp.com/"
 
 }
 else {
