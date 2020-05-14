@@ -6,11 +6,12 @@ const Exercise = props => (
   <tr>
     <td>{props.exercise.username}</td>
     <td>{props.exercise.description}</td>
-    <td>{props.exercise.duration}</td>
+    <td>{props.exercise.sentiScore}</td>
     {/* <td>{props.exercise.date.substring(0,10)}</td> */}
     <td>{"12/2/1999"}</td>
     <td>
-      <Link to={"/edit/"+props.exercise._id}>edit</Link> | <a href="#" onClick={() => { props.deleteExercise(props.exercise._id) }}>delete</a>
+      {/* <Link to={"/edit/"+props.exercise._id}>edit</Link> |  */}
+      <a href="#" style={{color:"red"}} onClick={() => { props.deleteExercise(props.exercise._id) }}>delete</a>
     </td>
   </tr>
 )
@@ -36,7 +37,7 @@ export default class ChatList extends Component {
   }
 
   deleteExercise(id) {
-    axios.delete('http://localhost:5000/exercises/'+id)
+    axios.delete('exercises/'+id)
       .then(response => { console.log(response.data)});
 
     this.setState({
@@ -59,7 +60,7 @@ export default class ChatList extends Component {
             <tr>
               <th>Username</th>
               <th>Description</th>
-              <th>Duration</th>
+              <th>SentiScore</th>
               <th>Date</th>
               <th>Actions</th>
             </tr>
