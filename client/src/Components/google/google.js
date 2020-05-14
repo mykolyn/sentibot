@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import API from "../utils/Api";
-import "../css/login.css";
+import API from "../../utils/Api";
+import "../../css/login.css";
 
 class Google extends Component {
 

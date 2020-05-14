@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import AppNavBar from "../Components/AppNavbar.js"
+import ChatList from "../Components/History/History"
 
 
 class History extends Component {
@@ -7,7 +8,10 @@ class History extends Component {
         return (
            <div>
                <AppNavBar />
-                <h4>Welcome to History</h4>
+               <div className="container">
+                <h4>     </h4>
+                <ChatList/>
+                </div>
            </div>
         )
     }

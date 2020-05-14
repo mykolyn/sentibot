@@ -17,6 +17,8 @@ router.post('/analyzer', (req,res) => {
   const analyzeParams = {
     'text': req.body.text,
     'features': {
+      "keywords": {
+        "sentiment": true},
       'sentiment': {},
       'emotion': {}
     }

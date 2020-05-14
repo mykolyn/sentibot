@@ -1,4 +1,4 @@
-
+require("dotenv").config
 const express = require("express")
 const mongoose= require("mongoose")
 const bodyParser = require('body-parser')
@@ -15,6 +15,9 @@ const passportSetup = require('./passport-setup')
 const keys = require('./config/keys');
 const cors = require('cors')
 const app = express();
+const path=require('path')
+
+const PORT = process.env.PORT || 3001;
 
 ///setup CORS
 app.use(
@@ -67,12 +70,26 @@ mongoose.connect("mongodb://localhost/watsonDB", { useNewUrlParser: true });
 
 //use Routes
 app.use('/api/messages', messages)
-app.use(routes);
+app.use('/api',routes);
 app.use('/api/watson', watson);
 
 
+const exercisesRouter = require('./routes/api/exercises');
+app.use('/exercises', exercisesRouter);
 
-const PORT = process.env.PORT || 3001;
+
+
+
+if (process.env.NODE_ENV==='production'){
+
+  app.use(express.static('client/build'))
+
+  app.get('*',(req,res)=>{
+   res.sendFile(path.join(__dirname,'client','build','index.html'))
+
+  })
+}
+
 
 app.listen(PORT, function() {
     console.log(`listening on ${PORT}`)
