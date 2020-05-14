@@ -107,8 +107,8 @@ console.log("asdasdasdasdasd"+response.data[0].sentiScore)
 
 
                 <Chatcards />
-                <div>
-                    <p style={{ marginLeft: "70px" }}>The color will change based on the sentiment score of your most recent message with our chatbot!</p>
+                <div style={{marginTop:"80px"}}>
+                    {/* <p style={{ marginLeft: "70px" }}>The color will change based on the sentiment score of your most recent message with our chatbot!</p> */}
                 </div>
                 <div className="container" style={{ textAlign: "center", marginBottom: "5%", marginTop: "-10%" }}>
                     {this.state.sentiScore === "positive" ? <SentimoodPos /> : <Sentimood />}
