@@ -46,13 +46,10 @@ class Home extends Component {
     }
 
     test = () => {
-        this.setState(state => ({
-            seconds: state.seconds + 1
-        }));
         axios.get('/exercises/sentiscore')
             .then(response => {
                 this.setState({ sentiScore: response.data[0].sentiScore })
-                console.log("asdasdasdasdasd" + response.data[0].sentiScore)
+console.log("asdasdasdasdasd"+response.data[0].sentiScore)
             })
             .catch((error) => {
                 console.log(error);
@@ -77,7 +74,7 @@ class Home extends Component {
     componentDidMount() {
         console.log("2222222running didmount in home.js")
         this.checkUser()
-        this.interval = setInterval(() => this.test(), 5000);
+        this.interval = setInterval(() => this.test(), 1000);
 
         // axios.get('/exercises/')
         // .then(response => {
@@ -114,7 +111,7 @@ class Home extends Component {
                     <p style={{ marginLeft: "70px" }}>The color will change based on the sentiment score of your most recent message with our chatbot!</p>
                 </div>
                 <div className="container" style={{ textAlign: "center", marginBottom: "5%", marginTop: "-10%" }}>
-                    {this.state.sentiScore === "positive" ? <SentimoodPos />  : <Sentimood />}
+                    {this.state.sentiScore === "positive" ? <SentimoodPos /> : <Sentimood />}
 
 
 

@@ -10,8 +10,8 @@ const Exercise = props => (
     {/* <td>{props.exercise.date.substring(0,10)}</td> */}
     <td>{"12/2/1999"}</td>
     <td>
-      {/* <Link to={"/edit/"+props.exercise._id}>edit</Link> | */}
-       <a href="#" style={{color:"red"}} onClick={() => { props.deleteExercise(props.exercise._id) }}>Delete</a>
+      {/* <Link to={"/edit/"+props.exercise._id}>edit</Link> |  */}
+      <a href="#" style={{color:"red"}} onClick={() => { props.deleteExercise(props.exercise._id) }}>delete</a>
     </td>
   </tr>
 )
@@ -37,7 +37,7 @@ export default class ChatList extends Component {
   }
 
   deleteExercise(id) {
-    axios.delete('/exercises/'+id)
+    axios.delete('exercises/'+id)
       .then(response => { console.log(response.data)});
 
     this.setState({
@@ -55,13 +55,12 @@ export default class ChatList extends Component {
     return (
       <div style={{marginTop:"10%"}}>
         <h3>Chat History</h3>
-        <br/>
         <table className="table">
           <thead className="thead-light">
             <tr>
               <th>Username</th>
               <th>Description</th>
-              <th>Sentiment Score</th>
+              <th>SentiScore</th>
               <th>Date</th>
               <th>Actions</th>
             </tr>
