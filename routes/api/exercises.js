@@ -8,7 +8,7 @@ router.route('/').get((req, res) => {
 });
 
 router.route('/sentiscore').get((req, res) => {
-  Exercise.find().sort({"created_at": 1}).limit(1) 
+  Exercise.find().sort({"_id": -1}).limit(1) 
     .then(exercises => res.json(exercises))
     .catch(err => res.status(400).json('Error: ' + err));
 });

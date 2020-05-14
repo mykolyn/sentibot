@@ -10,8 +10,8 @@
       }
       
        
-       .sentimood {
-            background: linear-gradient(45deg, #4A22D4, #65B162, #BD417A);
+       .sentimood1 {
+            background: linear-gradient(45deg, black, red, pink);
             background-size: 600% 600%;
             animation: GradientBackground 20s ease infinite;
             border: 0;
