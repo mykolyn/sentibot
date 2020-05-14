@@ -10,7 +10,7 @@ render(){
         <div style={{width:"60%", height:"40%"}}>
            
                 <iframe ></iframe>
-                <button className="sentimood"></button>
+                <button className="sentimood1"></button>
         </div>
     )
 }

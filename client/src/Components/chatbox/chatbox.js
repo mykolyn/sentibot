@@ -279,6 +279,13 @@ axios.post('/exercises/add', exercise)
             console.log("----run loop----" + commandList[i])
             console.log(debug[i] + " " + commandList[i])
 
+
+            if (message.data.text.length < 15) {
+              return setTimeout(() => this._sendMessage(`Please add more words for me to better understand.`), 500)
+
+            }
+
+
             if (statement.text.toLowerCase().includes("you") === true) {
               return setTimeout(() => this._sendMessage(`Try not to use "you" in your statement`), 500, console.log("run if true" + this.state.youCheck))
             }

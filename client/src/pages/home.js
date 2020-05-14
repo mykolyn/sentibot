@@ -46,10 +46,13 @@ class Home extends Component {
     }
 
     test = () => {
+        this.setState(state => ({
+            seconds: state.seconds + 1
+        }));
         axios.get('/exercises/sentiscore')
             .then(response => {
-                this.setState({ sentiScore: response.data.sentiScore })
-console.log("asdasdasdasdasd"+response.data.sentiScore)
+                this.setState({ sentiScore: response.data[0].sentiScore })
+                console.log("asdasdasdasdasd" + response.data[0].sentiScore)
             })
             .catch((error) => {
                 console.log(error);
@@ -64,7 +67,7 @@ console.log("asdasdasdasdasd"+response.data.sentiScore)
         }));
         axios.get('/exercises/sentiscore')
             .then(response => {
-                this.setState({ sentiScore: response.data.sentiScore })
+                this.setState({ sentiScore: response.data[0].sentiScore })
             })
             .catch((error) => {
                 console.log(error);
@@ -74,7 +77,7 @@ console.log("asdasdasdasdasd"+response.data.sentiScore)
     componentDidMount() {
         console.log("2222222running didmount in home.js")
         this.checkUser()
-        this.interval = setInterval(() => this.test(), 1000);
+        this.interval = setInterval(() => this.test(), 5000);
 
         // axios.get('/exercises/')
         // .then(response => {
@@ -99,8 +102,8 @@ console.log("asdasdasdasdasd"+response.data.sentiScore)
                 <div className="container" style={{ marginTop: "5%", marginBottom: "1%" }}>
                     <h1>Welcome {this.state.user}</h1>
                     <div>
-                        Seconds: {this.state.seconds}
-        Seconds: {this.state.sentiScore}
+                        {/* Seconds: {this.state.seconds}
+        Seconds: {this.state.sentiScore} */}
                     </div>
                 </div>
 
@@ -111,7 +114,7 @@ console.log("asdasdasdasdasd"+response.data.sentiScore)
                     <p style={{ marginLeft: "70px" }}>The color will change based on the sentiment score of your most recent message with our chatbot!</p>
                 </div>
                 <div className="container" style={{ textAlign: "center", marginBottom: "5%", marginTop: "-10%" }}>
-                    {this.state.sentiScore === "positive" ? <SentimoodPos /> : <Sentimood />}
+                    {this.state.sentiScore === "positive" ? <SentimoodPos />  : <Sentimood />}
 
 
 
